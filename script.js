@@ -8,23 +8,7 @@ const filters = document.querySelectorAll(".filters button");
 let filter = "all";
 
 
-const tasks = [
-  {
-    id: 1,
-    text: "tarefa 1",
-    completed: false,
-  },
-  {
-    id: 2,
-    text: "tarefa 2",
-    completed: true,
-  },
-  {
-    id: 3,
-    text: "tarefa 3",
-    completed: false,
-  },
-];
+const tasks = [];
 
 function renderTasks() {
   taskList.innerHTML = "";
@@ -39,7 +23,7 @@ function renderTasks() {
     const emptyMsg = document.createElement("li");
     emptyMsg.classList.add("empty-message");
 
-    if (task.length === 0) {
+    if (tasks.length === 0) {
         emptyMsg.textContent = "Nenhuma tarefa adicionada.";
     } else if (filter === "pending") {
       emptyMsg.textContent = "Nenhuma tarefa pendente.";
@@ -49,8 +33,9 @@ function renderTasks() {
         emptyMsg.textContent = "Nenhuma tarefa encontrada.";
     }
 
-    tasks.appendChild(emptyMsg);
-    return
+    taskList.appendChild(emptyMsg);
+    updateCount();
+    return;
   }
   filteredTasks.forEach((task) => {
     const li = document.createElement("li");
